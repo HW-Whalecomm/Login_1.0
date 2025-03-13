@@ -1,5 +1,6 @@
 import flet as ft
 from pages.authentication.login import Login
+from pages.dashboard.dashboard import Dashboard
 from router import views_handler
 from utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor,customtextHeaderColor
 
@@ -14,6 +15,8 @@ def main(page:ft.Page):
         page.padding = ft.padding.all(0)
         if page.route == "/login":
             page.add(Login(page))
+        if page.route == "/dashboard":
+            page.add(Dashboard(page))
 
     page.on_route_change = route_change
   

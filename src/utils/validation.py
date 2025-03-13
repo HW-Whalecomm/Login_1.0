@@ -4,9 +4,9 @@ class Validation():
     def __init__(self):
         pass
 
-    def is_valid_email(self, email):
+    def is_valid_email(self, usuario):
         pattern = '^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$'
-        return re.match(pattern, email) is not None
+        return re.match(pattern, usuario) is not None
     
     def is_valid_password(self, password):
         if len(password) < 8:
