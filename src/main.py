@@ -5,6 +5,7 @@ from router import views_handler
 from utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor,customtextHeaderColor
 
 
+
 def main(page:ft.Page):
     def route_change(route):
         # page.views.clear()
@@ -15,13 +16,13 @@ def main(page:ft.Page):
         page.padding = ft.padding.all(0)
         if page.route == "/login":
             page.add(Login(page))
-        if page.route == "/dashboard":
+        if page.route == "/":
             page.add(Dashboard(page))
 
     page.on_route_change = route_change
   
-    page.go("/login")
-
+    page.go("/")
+    
 
 
 ft.app(target=main, assets_dir = "assets")

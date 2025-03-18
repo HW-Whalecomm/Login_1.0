@@ -2,7 +2,6 @@
 customPrimaryColor = "#cb2b2b" 
 customBgColor = "white"
 customTextColor = "#868E96"
-customTextColor = "black"
 customtextHeaderColor = "Black"
 
 #side bar
