@@ -4,7 +4,7 @@ from utils.colors import customBgColor,customBorderColor,customDashboardBG,custo
 
 
 class CustomDisplayCard(ft.Container):
-    def __init__(self, iconbg, title, value, color, icon):
+    def __init__(self, iconbg=None, title=None, value=None, color=None, icon=None):
         super().__init__()
 
         self.iconbg = iconbg

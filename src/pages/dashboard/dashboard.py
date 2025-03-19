@@ -24,7 +24,8 @@ class Dashboard(ft.Container):
         naranaj2 ="#f17d10"
         naranja3 ="#f13910"
 
-        self.nodo = CustomDisplayCard(verde1,"Nodo 1",0.0,verde1,ft.Icons.BATTERY_FULL)
+        #self.nodo = ft.Text(value="Hola", color="red",size=12, weight=ft.FontWeight.BOLD)
+        self.nodo = CustomDisplayCard(iconbg=verde1,title="Nodo 1",value=0.0,color=verde1,icon=ft.Icons.BATTERY_FULL) 
         self.nodo1 = CustomDisplayCard(verde2,"Nodo 2",0.0,verde2,ft.Icons.BATTERY_6_BAR_SHARP)
         self.nodo2 = CustomDisplayCard(verde3,"Nodo 3",0.0,verde3,ft.Icons.BATTERY_5_BAR)
         self.nodo3 = CustomDisplayCard(amarillo1,"Nodo 4",0.0,amarillo1,ft.Icons.BATTERY_4_BAR)
@@ -61,6 +62,7 @@ class Dashboard(ft.Container):
                 ),
                 ft.Container(
                     padding=ft.padding.all(30),
+                    on_click= self.actualizar,
                     content=ft.Row(
                         alignment=ft.MainAxisAlignment.CENTER,
                         controls=[self.nodo8,
@@ -68,6 +70,7 @@ class Dashboard(ft.Container):
                                   #self.nodo10,
                                   #self.nodo11,
                                   ]
+                        
                                 )
                 ),
             ]
@@ -102,12 +105,15 @@ class Dashboard(ft.Container):
         page.update()
 
     def actualizar(self,e):
-        while(1):
-            print("Actualizando")
-            time.sleep(2)
-            self.nodo1.value=1.1
-            #self.nodo1.update()
-            self.contenedor_master.update()
-            time.sleep(2)
+        i=0
+    #     while(1):
+    #         print("Actualizando")
+    #         #time.sleep(2)
+    #         i = i+1
+    #         self.nodo.title = str(i)
+    #         self.nodo.update()
+    #         time.sleep(2)
 
-    _thread.start_new_thread(actualizar,("Dummy","e"))
+    # _thread.start_new_thread(actualizar,(None,None))
+
+    
