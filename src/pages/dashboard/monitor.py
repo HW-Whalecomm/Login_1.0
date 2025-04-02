@@ -293,7 +293,7 @@ class DataTable(ft.DataTable):
             self.rows.append(data)
         self.update()
 
-def main(page:ft.Page) -> None:
+def Tabla(page:ft.Page) -> None:
     page.bgcolor= "#fdfdfd"
 
     table = DataTable()
@@ -327,4 +327,4 @@ def main(page:ft.Page) -> None:
     
 
 
-ft.app(target=main)
+ft.app(target=Tabla)

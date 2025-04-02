@@ -1,7 +1,8 @@
 import flet as ft
 from pages.authentication.login import Login
 from pages.dashboard.dashboard import Dashboard
-from pages.dashboard.monitor import Dispositivos
+from pages.dashboard.monitor import Tabla
+from pages.mapa import Mapa
 from router import views_handler
 from utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor,customtextHeaderColor
 
@@ -19,8 +20,10 @@ def main(page:ft.Page):
             page.add(Login(page))
         if page.route == "/dashboard":
             page.add(Dashboard(page))
+        if page.route == "/mapa":
+            page.add(Mapa(page))
         if page.route == "/":
-            page.add(Dispositivos(page))
+             page.add(Tabla(page))
 
     page.on_route_change = route_change
   
