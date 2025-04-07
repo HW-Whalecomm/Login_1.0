@@ -1,9 +1,10 @@
 import flet as ft
-from components.fields import CustomTextField
-from utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor,customtextHeaderColor
-from utils.validation import Validation
+
+from pages.authentication.components.fields import CustomTextField
+from pages.authentication.utils.colors import *
+from pages.authentication.utils.validation import Validation
 import time
-from  pages.authentication.access import hash_verify
+from pages.authentication.access import hash_verify
 
 
 class Login(ft.Container):

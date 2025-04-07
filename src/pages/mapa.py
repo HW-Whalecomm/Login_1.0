@@ -1,6 +1,6 @@
 import flet as ft
-from components.cards import CustomDisplayCard
-from utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor,customtextHeaderColor
+from pages.components.cards import CustomDisplayCard
+from styles.colors import *
 import flet_map as map
 
 class Mapa(ft.Container):

@@ -287,7 +287,7 @@ class DataTable(ft.DataTable):
         for values in self.df.values():
             #create a new DataRow
             data = ft.DataRow(cells = [
-                ft.DataCell(ft.Text(value,color="black"))
+                ft.DataCell(ft.Text(value,color="black", ))
                 for value in values.values()
             ])
             self.rows.append(data)

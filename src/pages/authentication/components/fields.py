@@ -1,5 +1,5 @@
 import flet as ft
-from utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor
+from pages.authentication.components.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor
 
 class CustomTextField(ft.TextField):
     def __init__(
