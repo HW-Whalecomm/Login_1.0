@@ -3,6 +3,7 @@ from pages.dashboard.components.tabla import Tabla
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.components.grafica import Grafica
 from pages.dashboard.components.telemetry import Telemetry
+from pages.dashboard.components.register import Register
 from styles.colors import *
 
 
@@ -24,7 +25,7 @@ class Dashboard(ft.Container):
             page.update()
         
         def home_function(e):
-            self.main_container.content=ft.Text("Home")
+            self.main_container.content=Mapa(page)
             self.main_container.update()
         
         def table_function(e):
@@ -36,7 +37,7 @@ class Dashboard(ft.Container):
             self.main_container.update()
 
         def register_function(e):
-            self.main_container.content=Telemetry(page)
+            self.main_container.content=Register(page)
             self.main_container.update()
 
         def invoice_function(e):
