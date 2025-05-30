@@ -1,4 +1,47 @@
-dummy_data={
+import requests
+import json
+
+medidores = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/consulta")
+lectura = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/lectura")
+status = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/status")
+
+medidores = json.loads(medidores.text)
+lectura = json.loads(lectura.text)
+status = json.loads(status.text)
+
+ids = list(medidores.keys())
+
+
+dummy_data={}
+
+for medidor in ids:
+    if medidor in lectura:
+        dummy_data[medidor]={
+            "id":medidor,
+            "cuenta": medidores[medidor]['cuenta'],
+            "titular": medidores[medidor]['titular'],
+            "lectura":lectura[medidor]['lectura'],
+            "batería":lectura[medidor]['bateria'],
+            "direccion": medidores[medidor]['direccion'],
+            "ubicacion":medidores[medidor]['ubicacion']
+            }
+    else:
+        dummy_data[medidor]={
+            "id":medidor,
+            "cuenta": medidores[medidor]['cuenta'],
+            "titular": medidores[medidor]['titular'],
+            "lectura":"--",
+            "batería":"--",
+            "direccion": medidores[medidor]['direccion'],
+            "ubicacion":medidores[medidor]['ubicacion']
+            }
+    if medidor in status:
+        dummy_data[medidor]['status']=status[medidor]['status']
+    else:
+        dummy_data[medidor]['status']="--"
+
+
+""" ummy_data={
     0:{"encoder":"232006626",
        "cuenta":"04356",
        "consumo":46.8463,
@@ -35,4 +78,4 @@ dummy_data={
        "status":"OK",
        "detalles":"Dashboard"},
     
-}
+} """

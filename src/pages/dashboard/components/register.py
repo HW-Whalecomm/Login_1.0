@@ -1,4 +1,6 @@
 import flet as ft
+import json
+import requests
 
 #define form class styling and attributes
 form_style: dict[str, any] = {
@@ -142,6 +144,20 @@ class Register(ft.Container):
                 "Encoder": encoder,
                 "Offset" : offset
                 }
+            
+            register = {
+                "id":encoder,
+                "direccion":direccion,
+                "cuenta": cuenta,
+                "titular": titular,
+                "consumo_pendiente": offset,
+                "ubicacion": str(latitud)
+            }
+            
+            headers = {'Content-type': 'application/json'}
+            respuesta = requests.put("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/registro",json = register, headers = headers)
+            print("Status Code:", respuesta.status_code)
+            #print (data)
             self.clear_entries()
 
         bandera = True

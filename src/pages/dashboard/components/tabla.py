@@ -91,17 +91,25 @@ class Header(ft.Container):
         self.search.opacity = 1 if e.data == "true" else 0
         self.search.update()
 
-    #define a placeholder methor for tiltering data
+    #define a placeholder methor for filtering data
     def filter_dt_rows(self,e):
         for data_rows in self.dt.rows:
             data_col1 = data_rows.cells[0]
             data_col2 = data_rows.cells[1]
             data_col3 = data_rows.cells[2]
             data_col4 = data_rows.cells[3]
+            data_col5 = data_rows.cells[4]
+            data_col6 = data_rows.cells[5]
+            data_col7 = data_rows.cells[6]
+            data_col8 = data_rows.cells[7]
             data_rows.visible=(True if (e.control.value.lower() in data_col1.content.value.lower()) or
                                  (e.control.value.lower() in data_col2.content.value.lower()) or 
                                  (e.control.value.lower() in str(data_col3.content.value).lower()) or 
-                                 (e.control.value.lower() in str(data_col4.content.value).lower()) 
+                                 (e.control.value.lower() in data_col4.content.value.lower()) or
+                                 (e.control.value.lower() in data_col5.content.value.lower()) or 
+                                 (e.control.value.lower() in str(data_col6.content.value).lower()) or 
+                                 (e.control.value.lower() in data_col7.content.value.lower()) or 
+                                 (e.control.value.lower() in str(data_col8.content.value).lower()) 
                                  else False)
             
             data_rows.update()
@@ -210,7 +218,7 @@ class Form(ft.Container):
         self.content.update()
 
 #define data table style, attributes and columns
-column_names =["Encoder", "Cuenta", "Consumo", "Status", "Detalles"]
+column_names =["Encoder", "Cuenta", "Titular", "Lectura", "Batería", "Dirección", "Ubicación","Status"]
 
 data_table_style={
     "expand":True,
