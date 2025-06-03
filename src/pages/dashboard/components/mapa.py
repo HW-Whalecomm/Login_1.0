@@ -13,6 +13,7 @@ class Mapa(ft.Container):
         self.marcadores = []
 
         for pin in self.pines:
+            #linea de cambio
             data_ubicacion=self.pines[pin]["ubicacion"].split(",")
             if self.pines[pin]["status"]=="telemetry" or (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
                 color = ft.Colors.ORANGE
