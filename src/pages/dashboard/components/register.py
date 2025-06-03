@@ -151,13 +151,12 @@ class Register(ft.Container):
                 "cuenta": cuenta,
                 "titular": titular,
                 "consumo_pendiente": offset,
-                "ubicacion": str(latitud)
+                "ubicacion": str(latitud)+","+str(longitud)
             }
             
             headers = {'Content-type': 'application/json'}
             respuesta = requests.put("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/registro",json = register, headers = headers)
             print("Status Code:", respuesta.status_code)
-            #print (data)
             self.clear_entries()
 
         bandera = True

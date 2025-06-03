@@ -1,10 +1,9 @@
 import flet as ft
-from pages.dashboard.components.utils.mqtt_data import *
-
-
+import pages.dashboard.components.utils.mqtt_data as datos
+#from pages.dashboard.components.utils.mqtt_data import * 
 
 class Controller:
-    items: dict = dummy_data
+    items: dict = datos.dummy_data
     counter: int = len(items)
 
     @staticmethod

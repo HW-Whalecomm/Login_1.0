@@ -2,6 +2,7 @@ import flet as ft
 from pages.authentication.login import Login
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.dashboard_interface import Dashboard
+import pages.dashboard.components.utils.mqtt_data as datos
 # from pages.dashboard.monitor import Tabla
 # from pages.mapa import Mapa
 from router import views_handler
@@ -10,6 +11,7 @@ from pages.authentication.utils.colors import customBgColor,customBorderColor,cu
 
 
 def main(page:ft.Page):
+    datos.request_data()
     def route_change(route):
         # page.views.clear()
         # page.views.append(views_handler(page)[page.route])
