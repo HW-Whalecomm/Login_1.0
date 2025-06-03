@@ -119,7 +119,7 @@ class Dashboard(ft.Container):
             border=ft.border.all(2,"#ebebeb"),
             padding=ft.padding.all(5),
             content=(
-                ft.Text("Hola")
+                Mapa(page)
             )
         )
 
