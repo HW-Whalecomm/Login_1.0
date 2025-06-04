@@ -9,9 +9,9 @@ dummy_data={}
 def request_data():
    global dummy_data
 
-   medidores = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/consulta")
-   lectura = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/lectura")
-   status = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/status")
+   medidores = requests.get("https:\\nkldhxv7pi.execute-api.us-east-1.amazonaws.com\consulta")
+   lectura = requests.get("https:\\nkldhxv7pi.execute-api.us-east-1.amazonaws.com\lectura")
+   status = requests.get("https:\\nkldhxv7pi.execute-api.us-east-1.amazonaws.com\status")
 
    medidores = json.loads(medidores.text)
    lectura = json.loads(lectura.text)
