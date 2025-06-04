@@ -8,7 +8,9 @@ authors = [
     { name = "Flet developer", email = "you@example.com" }
 ]
 dependencies = [
-  "flet==0.27.5"
+  "flet==0.27.5",
+  "flet-map==0.1.0",
+  "requests==2.32.3"
 ]
 
 [tool.flet]
@@ -32,6 +34,8 @@ path = "src"
 [tool.uv]
 dev-dependencies = [
     "flet[all]==0.27.5",
+    "flet-map==0.1.0",
+    "requests==2.32.3"
 ]
 
 [tool.poetry]
@@ -39,3 +43,5 @@ package-mode = false
 
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.27.5"}
+flet-map = {version = "0.1.0"}
+requests = {version = "2.32.3"}
