@@ -1,13 +1,34 @@
 import requests
 import json
+import datetime
+
+medidores_data={}
+medidores_corte={}
 
 
+def corte_periodo():
+   global medidores_corte
 
+   fecha = datetime.datetime.now()
+   fecha = str(fecha)
+   fecha_corte = fecha.split()
 
-dummy_data={}
+   periodo = {
+      "periodo": fecha_corte[0],
+      "hora": fecha_corte[1]
+   }
+
+   headers = {'Content-type': 'application/json'}
+   
+   cortes = requests.post("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/corte", json = periodo, headers=headers)
+   cortes = json.loads(cortes.text)
+   medidores_corte = cortes
+
+   print(medidores_corte)
+
 
 def request_data():
-   global dummy_data
+   global medidores_data
 
 
 
@@ -23,7 +44,7 @@ def request_data():
 
    for medidor in ids:
       if medidor in lectura:
-         dummy_data[medidor]={
+         medidores_data[medidor]={
                "id":medidor,
                "cuenta": medidores[medidor]['cuenta'],
                "titular": medidores[medidor]['titular'],
@@ -33,7 +54,7 @@ def request_data():
                "ubicacion":medidores[medidor]['ubicacion']
                }
       else:
-         dummy_data[medidor]={
+         medidores_data[medidor]={
                "id":medidor,
                "cuenta": medidores[medidor]['cuenta'],
                "titular": medidores[medidor]['titular'],
@@ -43,9 +64,7 @@ def request_data():
                "ubicacion":medidores[medidor]['ubicacion']
                }
       if medidor in status:
-         dummy_data[medidor]['status']=status[medidor]['status']
+         medidores_data[medidor]['status']=status[medidor]['status']
       else:
-         dummy_data[medidor]['status']="--"
+         medidores_data[medidor]['status']="--"
 
-
-   print(dummy_data)

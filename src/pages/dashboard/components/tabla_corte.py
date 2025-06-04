@@ -3,8 +3,7 @@ import pages.dashboard.components.utils.data_request as datos
 #from pages.dashboard.components.utils.mqtt_data import * 
 
 class Controller:
-    items: dict = datos.medidores_data
-    counter: int = len(items)
+    items: dict = datos.medidores_corte
 
     @staticmethod
     def get_items():
@@ -60,58 +59,72 @@ def search_bar(control: ft.TextField):
     )
 
 
+
+
 #define header class
 
 class Header(ft.Container):
-    def __init__(self, dt: ft.DataTable) -> None:
-        super().__init__(**header_style, 
-                         on_hover=self.toogle_search)
+    def __init__(self, dt: ft.DataTable)-> None:
+        super().__init__(**header_style)
+
+        def corte_periodo(e):
+            datos.corte_periodo()
+            print("Se hace el corte del periodo")
+            self.dt.fill_data_table()
         
         #create a dt attribute
         self.dt= dt
 
-        #create a textfield for search/filter
-        self.search_value = search_field(self.filter_dt_rows)
+        # #create a textfield for search/filter
+        # self.search_value = search_field(self.filter_dt_rows)
 
-        #create a searchbox
-        self.search = search_bar(self.search_value)
+        # #create a searchbox
+        # self.search = search_bar(self.search_value)
 
-        #define other class atributes
-        self.avatar = ft.IconButton(icon=ft.Icons.SEARCH,icon_color="#cb2b2b")
+        # #define other class atributes
+        # self.avatar = ft.IconButton(icon=ft.Icons.SEARCH,icon_color="#cb2b2b")
 
         #compile the attributyes inside the header container
+
+        self.boton_corte = ft.ElevatedButton("Corte",
+                                             style=ft.ButtonStyle(
+                                                 color=ft.Colors.WHITE,
+                                                 bgcolor="#cb2b2b",
+                                             ),
+                                             on_click=corte_periodo,
+                                             width=120
+                                             )
         self.content = ft.Row(
             alignment="end",
-            controls=[self.search,self.avatar]
+            controls=[self.boton_corte]
         )
 
-    #define method that toggles search box visibility
-    def toogle_search(self, e: ft.HoverEvent):
-        self.search.opacity = 1 if e.data == "true" else 0
-        self.search.update()
+    # #define method that toggles search box visibility
+    # def toogle_search(self, e: ft.HoverEvent):
+    #     self.search.opacity = 1 if e.data == "true" else 0
+    #     self.search.update()
 
-    #define a placeholder methor for filtering data
-    def filter_dt_rows(self,e):
-        for data_rows in self.dt.rows:
-            data_col1 = data_rows.cells[0]
-            data_col2 = data_rows.cells[1]
-            data_col3 = data_rows.cells[2]
-            data_col4 = data_rows.cells[3]
-            data_col5 = data_rows.cells[4]
-            data_col6 = data_rows.cells[5]
-            data_col7 = data_rows.cells[6]
-            data_col8 = data_rows.cells[7]
-            data_rows.visible=(True if (e.control.value.lower() in data_col1.content.value.lower()) or
-                                 (e.control.value.lower() in data_col2.content.value.lower()) or 
-                                 (e.control.value.lower() in str(data_col3.content.value).lower()) or 
-                                 (e.control.value.lower() in data_col4.content.value.lower()) or
-                                 (e.control.value.lower() in data_col5.content.value.lower()) or 
-                                 (e.control.value.lower() in str(data_col6.content.value).lower()) or 
-                                 (e.control.value.lower() in data_col7.content.value.lower()) or 
-                                 (e.control.value.lower() in str(data_col8.content.value).lower()) 
-                                 else False)
+    # #define a placeholder methor for filtering data
+    # def filter_dt_rows(self,e):
+    #     for data_rows in self.dt.rows:
+    #         data_col1 = data_rows.cells[0]
+    #         data_col2 = data_rows.cells[1]
+    #         data_col3 = data_rows.cells[2]
+    #         data_col4 = data_rows.cells[3]
+    #         data_col5 = data_rows.cells[4]
+    #         data_col6 = data_rows.cells[5]
+    #         data_col7 = data_rows.cells[6]
+
+    #         data_rows.visible=(True if (e.control.value.lower() in data_col1.content.value.lower()) or
+    #                              (e.control.value.lower() in data_col2.content.value.lower()) or 
+    #                              (e.control.value.lower() in data_col3.content.value.lower()) or 
+    #                              (e.control.value.lower() in data_col4.content.value.lower()) or
+    #                              (e.control.value.lower() in data_col5.content.value.lower()) or 
+    #                              (e.control.value.lower() in data_col6.content.value.lower()) or 
+    #                              (e.control.value.lower() in data_col7.content.value.lower()) 
+    #                              else False)
             
-            data_rows.update()
+    #         data_rows.update()
 
 
 #define form class styling and attributes
@@ -166,58 +179,25 @@ class Form(ft.Container):
         #create a dt attribute
         self.dt = dt
 
-        #define the 4 row textfields
-        self.row1_value = text_field()
-        self.row2_value = text_field()
-        self.row3_value = text_field()
-        self.row4_value = text_field()
-
-        #define and wrap each inside container
-        self.row1 = text_field_container(True, "Row One", self.row1_value)
-        self.row2 = text_field_container(3, "Row Two", self.row2_value)
-        self.row3 = text_field_container(1, "Row Three", self.row3_value)
-        self.row4 = text_field_container(1, "Row Four", self.row4_value)
-
         #define a button to submit the data
-        self.submit = ft.ElevatedButton(
-            text="Submit",
+        self.corte_perioodo = ft.ElevatedButton(
+            text="Corte",
             style=ft.ButtonStyle(shape={"":ft.RoundedRectangleBorder(radius=8)}),
-            on_click=self.submit_data,
+            on_click=self.corte,
         )
 
-        #compile all the atributes into the class container
-        self.content=ft.Column(
-            expand=True,
-            controls=[
-                ft.Row(controls=[self.row1]),
-                ft.Row(controls=[self.row2,self.row3,self.row4]),
-                ft.Row(controls=[self.submit],alignment="end"),
-            ]
-        )
 
-    def submit_data (self,e:ft.TapEvent):
-        data={
-            "Encoder":self.row1_value.value,
-            "Cuenta":self.row2_value.value,
-            "Consumo":self.row3_value.value,
-            "Status":self.row4_value.value,
-            "Detalles":"Dashboard",
-            }
-        Controller.add_item(data)
+    def corte (self,e:ft.TapEvent):
+        datos.corte_periodo()
         self.clear_entries()
         self.dt.fill_data_table()
 
     #define a method to clear entries post-submit
     def clear_entries(self):
-        self.row1_value.value=""
-        self.row2_value.value=""
-        self.row3_value.value=""
-        self.row4_value.value=""
-
         self.content.update()
 
 #define data table style, attributes and columns
-column_names =["Encoder", "Cuenta", "Titular", "Lectura", "Batería", "Dirección", "Ubicación","Status"]
+column_names =["Encoder", "Cuenta", "L. Inicial", "L. Final", "Consumo", "Periodo", "Hora"]
 
 data_table_style={
     "expand":True,
@@ -253,33 +233,8 @@ class DataTable(ft.DataTable):
             self.rows.append(data)
         #self.update()
 
-# def Tabla(page:ft.Page) -> None:
-#     page.bgcolor= "#fdfdfd"
 
-#     table = DataTable()
-    
-#     header = Header(dt=table)
-#     form = Form(dt=table)
-
-#     page.add(
-#         ft.Column(
-#             expand=True,
-#             controls=[
-#                 #header....
-#                 header,
-#                 # ft.Divider(height=2, color="transparent"),
-#                 # #form
-#                 # form,
-#                 ft.Column(
-#                     scroll="hidden",
-#                     expand=True,
-#                     controls=[ft.Row(controls=[table])]
-#                 )
-#             ]
-#         )
-#     )
-
-class Tabla(ft.Container):
+class Tabla_corte(ft.Container):
 
     def __init__(self, page:ft.Page):
         super().__init__()

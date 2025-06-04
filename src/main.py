@@ -2,7 +2,7 @@ import flet as ft
 from pages.authentication.login import Login
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.dashboard_interface import Dashboard
-import pages.dashboard.components.utils.mqtt_data as datos
+import pages.dashboard.components.utils.data_request as datos
 # from pages.dashboard.monitor import Tabla
 # from pages.mapa import Mapa
 from router import views_handler

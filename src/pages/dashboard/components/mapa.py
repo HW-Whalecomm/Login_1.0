@@ -1,14 +1,18 @@
 import flet as ft
 import flet_map as map
-import pages.dashboard.components.utils.mqtt_data as datos
+import pages.dashboard.components.utils.data_request as datos
+
 
 
 
 class Mapa(ft.Container):
+
     def __init__(self, page:ft.Page):
         super().__init__()
+        
 
-        self.pines = datos.dummy_data
+
+        self.pines = datos.medidores_data
 
         self.marcadores = []
 
@@ -21,8 +25,20 @@ class Mapa(ft.Container):
                 color = ft.Colors.RED
             else:
                 color = ft.Colors.GREEN
+            data_pin = {"id":pin,
+                        "lat":float(data_ubicacion[0]),
+                        "lon":float(data_ubicacion[1]),
+                        "status":self.pines[pin]["status"],
+                        "lectura":12345.6789,
+                        "bateria":3.95,
+                        "timestamp":"4 Junio 2025 13:34:56"}
+            
+            def  click_boton(data_ion):
+                datos_pin = data_ion
+                print(datos_pin)
+            
             self.marcadores.append(map.Marker(
-                content=ft.Container(ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.pines[pin]["status"])),
+                content=ft.Container(ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.pines[pin]["status"],on_click=lambda e: click_boton(pin) )),
                 coordinates=map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1]))
             ))
             

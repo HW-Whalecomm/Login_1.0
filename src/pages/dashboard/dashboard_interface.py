@@ -1,5 +1,6 @@
 import flet as ft
 from pages.dashboard.components.tabla import Tabla
+from pages.dashboard.components.tabla_corte import Tabla_corte
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.components.grafica import Grafica
 from pages.dashboard.components.telemetry import Telemetry
@@ -41,7 +42,7 @@ class Dashboard(ft.Container):
             self.main_container.update()
 
         def invoice_function(e):
-            self.main_container.content=ft.Text("Invoice")
+            self.main_container.content=Tabla_corte(page)
             self.main_container.update()
 
         def dashboard_function(e):
