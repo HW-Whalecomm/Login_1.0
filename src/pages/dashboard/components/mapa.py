@@ -16,6 +16,10 @@ class Mapa(ft.Container):
 
         self.marcadores = []
 
+        def  click_boton(data_ion):
+            datos_pin = data_ion
+            print(datos_pin)
+
         for pin in self.pines:
             #linea de cambio
             data_ubicacion=self.pines[pin]["ubicacion"].split(",")
@@ -25,18 +29,7 @@ class Mapa(ft.Container):
                 color = ft.Colors.RED
             else:
                 color = ft.Colors.GREEN
-            data_pin = {"id":pin,
-                        "lat":float(data_ubicacion[0]),
-                        "lon":float(data_ubicacion[1]),
-                        "status":self.pines[pin]["status"],
-                        "lectura":12345.6789,
-                        "bateria":3.95,
-                        "timestamp":"4 Junio 2025 13:34:56"}
-            
-            def  click_boton(data_ion):
-                datos_pin = data_ion
-                print(datos_pin)
-            
+            print(pin)
             self.marcadores.append(map.Marker(
                 content=ft.Container(ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.pines[pin]["status"],on_click=lambda e: click_boton(pin) )),
                 coordinates=map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1]))
