@@ -24,7 +24,7 @@ def corte_periodo():
    cortes = json.loads(cortes.text)
    medidores_corte = cortes
 
-   print(medidores_corte)
+   #print(medidores_corte)
 
 
 def request_data():
