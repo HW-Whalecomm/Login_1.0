@@ -10,33 +10,37 @@ class Mapa(ft.Container):
     def __init__(self, page:ft.Page):
         super().__init__()
         
-
-
         self.pines = datos.medidores_data
 
         self.marcadores = []
 
-        def  click_boton(data_ion):
-            datos_pin = data_ion
+        
+        def  click_boton(e,self):
+            datos_pin = self
             print(datos_pin)
+        
 
         for pin in self.pines:
             #linea de cambio
             data_ubicacion=self.pines[pin]["ubicacion"].split(",")
-            if self.pines[pin]["status"]=="telemetry" or (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
-                color = ft.Colors.ORANGE
-            elif self.pines[pin]["status"]=="disconnected" or float(self.pines[pin]["batería"])<3.0:
-                color = ft.Colors.RED
-            else:
-                color = ft.Colors.GREEN
-            print(pin)
+            # if self.pines[pin]["status"]=="telemetry" or (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
+            #     color = ft.Colors.ORANGE
+            # elif self.pines[pin]["status"]=="disconnected" or float(self.pines[pin]["batería"])<3.0:
+            #     color = ft.Colors.RED
+            # else:
+            #     color = ft.Colors.GREEN
+            #print(pin)
+            #status = self.pines[pin]["status"]
+            status = "Disconnected"
+            color = ft.Colors.RED
+            self.boton_marcador = ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = status,on_click= lambda e: click_boton(e,self.boton_marcador))
             self.marcadores.append(map.Marker(
-                content=ft.Container(ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.pines[pin]["status"],on_click=lambda e: click_boton(pin) )),
+                content=ft.Container(self.boton_marcador),
                 coordinates=map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1]))
             ))
             
             
-
+        
 
         self.expand = True
         
@@ -44,7 +48,7 @@ class Mapa(ft.Container):
         
         self.mapa = map.Map(
             expand = True,
-            initial_center = map.MapLatitudeLongitude(19.411361473418378, -99.17800260085995),
+            initial_center = map.MapLatitudeLongitude(20.699615, -103.39853),
             initial_zoom = 16,
             interaction_configuration = map.MapInteractionConfiguration(
                 flags = map.MapInteractiveFlag.ALL
