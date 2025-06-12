@@ -23,17 +23,17 @@ class Mapa(ft.Container):
         for pin in self.pines:
             #linea de cambio
             data_ubicacion=self.pines[pin]["ubicacion"].split(",")
-            # if self.pines[pin]["status"]=="telemetry" or (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
-            #     color = ft.Colors.ORANGE
-            # elif self.pines[pin]["status"]=="disconnected" or float(self.pines[pin]["batería"])<3.0:
-            #     color = ft.Colors.RED
-            # else:
-            #     color = ft.Colors.GREEN
-            #print(pin)
-            #status = self.pines[pin]["status"]
-            status = "Disconnected"
-            color = ft.Colors.RED
-            self.boton_marcador = ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = status,on_click= lambda e: click_boton(e,self.boton_marcador))
+            if self.pines[pin]["status"]=="telemetry" or (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
+                color = ft.Colors.ORANGE
+            elif self.pines[pin]["status"]=="disconnected" or float(self.pines[pin]["batería"])<3.0:
+                color = ft.Colors.RED
+            else:
+                color = ft.Colors.GREEN
+            
+            texto = "Encode: {encoder}\nCuenta: {cuenta}\nLectura: {lectura}\nFecha: {fecha}\nBatería: {bat}\nStatus: {status}".format(encoder=pin, cuenta=self.pines[pin]["cuenta"],lectura=self.pines[pin]["lectura"],fecha=self.pines[pin]["fecha"],bat = self.pines[pin]["batería"],status=self.pines[pin]["status"])
+
+            self.leyenda = ft.Tooltip(message=texto)
+            self.boton_marcador = ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.leyenda)
             self.marcadores.append(map.Marker(
                 content=ft.Container(self.boton_marcador),
                 coordinates=map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1]))

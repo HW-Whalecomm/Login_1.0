@@ -93,7 +93,6 @@ class Dashboard(ft.Container):
                             controls=[
                             ft.IconButton(icon=ft.Icons.HOME,icon_color="white", on_click=home_function),
                             ft.IconButton(icon=ft.Icons.TABLE_VIEW,icon_color="white", on_click=table_function),
-                            ft.IconButton(icon=ft.Icons.MAP,icon_color="white", on_click=map_function),
                             ft.IconButton(icon=ft.Icons.APP_REGISTRATION,icon_color="white", on_click=register_function),
                             ft.IconButton(icon=ft.Icons.REPORT,icon_color="white", on_click=invoice_function),
                             ft.IconButton(icon=ft.Icons.ADDCHART,icon_color="white", on_click=dashboard_function)

@@ -44,12 +44,14 @@ def request_data():
 
    for medidor in ids:
       if medidor in lectura:
+         fecha = str(datetime.datetime.fromtimestamp(int(lectura[medidor]['timestamp'])/1000))
          medidores_data[medidor]={
                "id":medidor,
                "cuenta": medidores[medidor]['cuenta'],
                "titular": medidores[medidor]['titular'],
                "lectura":lectura[medidor]['lectura'],
                "batería":lectura[medidor]['bateria'],
+               "fecha":fecha,
                "direccion": medidores[medidor]['direccion'],
                "ubicacion":medidores[medidor]['ubicacion']
                }
