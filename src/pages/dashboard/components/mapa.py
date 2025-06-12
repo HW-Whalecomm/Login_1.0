@@ -15,8 +15,8 @@ class Mapa(ft.Container):
         self.marcadores = []
 
         
-        def  click_boton(e,self):
-            datos_pin = self
+        def  click_boton(e):
+            datos_pin = self.boton_marcador
             print(datos_pin)
         
 
@@ -32,8 +32,16 @@ class Mapa(ft.Container):
             
             texto = "Encoder: {encoder}\nCuenta: {cuenta}\nLectura: {lectura}\nFecha: {fecha}\nBatería: {bat}\nStatus: {status}".format(encoder=pin, cuenta=self.pines[pin]["cuenta"],lectura=self.pines[pin]["lectura"],fecha=self.pines[pin]["fecha"],bat = self.pines[pin]["batería"],status=self.pines[pin]["status"])
 
-            self.leyenda = ft.Tooltip(message=texto)
-            self.boton_marcador = ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.leyenda)
+            self.leyenda = ft.Tooltip(message=texto,text_style=ft.TextStyle(size=18, color=ft.Colors.WHITE),gradient=ft.LinearGradient(
+                                                                                                                begin=ft.alignment.top_left,
+                                                                                                                end=ft.alignment.Alignment(0.8, 1),
+                                                                                                                colors=["#cb2b2b",
+                                                                                                                        "#B48484",
+                                                                                                                ],
+                                                                                                                tile_mode=ft.GradientTileMode.MIRROR
+                                                                                                            )
+                                    )
+            self.boton_marcador = ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.leyenda, data=pin, on_click=click_boton)
             self.marcadores.append(map.Marker(
                 content=ft.Container(self.boton_marcador),
                 coordinates=map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1]))
