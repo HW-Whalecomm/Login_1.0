@@ -217,7 +217,7 @@ class Form(ft.Container):
         self.content.update()
 
 #define data table style, attributes and columns
-column_names =["Encoder", "Cuenta", "Titular", "Lectura", "Batería", "Dirección", "Ubicación","Status"]
+column_names =["Encoder", "Cuenta", "Titular", "Lectura", "Fecha","Batería", "Dirección", "Ubicación","Status"]
 
 data_table_style={
     "expand":True,

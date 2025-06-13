@@ -50,8 +50,8 @@ def request_data():
                "cuenta": medidores[medidor]['cuenta'],
                "titular": medidores[medidor]['titular'],
                "lectura":lectura[medidor]['lectura'],
-               "batería":lectura[medidor]['bateria'],
                "fecha":fecha,
+               "batería":lectura[medidor]['bateria'],
                "direccion": medidores[medidor]['direccion'],
                "ubicacion":medidores[medidor]['ubicacion']
                }

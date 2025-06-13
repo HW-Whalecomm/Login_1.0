@@ -33,9 +33,9 @@ class Dashboard(ft.Container):
             self.main_container.content=Tabla(page)
             self.main_container.update()
 
-        def map_function(e):
-            self.main_container.content=Mapa(page)
-            self.main_container.update()
+        # def map_function(e):
+        #     self.main_container.content=Mapa(page)
+        #     self.main_container.update()
 
         def register_function(e):
             self.main_container.content=Register(page)

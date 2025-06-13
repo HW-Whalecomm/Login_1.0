@@ -38,7 +38,7 @@ class Mapa(ft.Container):
                                                                                                                 colors=["#cb2b2b",
                                                                                                                         "#B48484",
                                                                                                                 ],
-                                                                                                                tile_mode=ft.GradientTileMode.MIRROR
+                                                                                                             tile_mode=ft.GradientTileMode.MIRROR
                                                                                                             )
                                     )
             self.boton_marcador = ft.IconButton(icon=ft.Icons.LOCATION_ON, icon_color = color, tooltip = self.leyenda, data=pin, on_click=click_boton)
