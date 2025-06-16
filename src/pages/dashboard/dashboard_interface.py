@@ -45,32 +45,32 @@ class Dashboard(ft.Container):
             self.main_container.content=Tabla_corte(page)
             self.main_container.update()
 
-        def dashboard_function(e):
-            self.main_container.content = ft.Container(
-                content = (
-                    ft.Row(
-                        controls = [
-                            ft.Container(
-                                expand = True,
-                                content=(Mapa(page))
-                            ),
-                            ft.VerticalDivider(width=1, color=ft.Colors.RED_100),
-                            ft.Container(
-                                expand=True,
-                                content=(
-                                    ft.Column(
-                                        controls=[
-                                            Grafica(page),
-                                            ft.Divider(height=5, color=ft.Colors.RED_100),
-                                            Telemetry(page)
-                                        ]
-                                    )
-                                )
-                            )
-                        ]
-                    )
-                )
-            )
+        # def dashboard_function(e):
+        #     self.main_container.content = ft.Container(
+        #         content = (
+        #             ft.Row(
+        #                 controls = [
+        #                     ft.Container(
+        #                         expand = True,
+        #                         content=(Mapa(page))
+        #                     ),
+        #                     ft.VerticalDivider(width=1, color=ft.Colors.RED_100),
+        #                     ft.Container(
+        #                         expand=True,
+        #                         content=(
+        #                             ft.Column(
+        #                                 controls=[
+        #                                     Grafica(page),
+        #                                     ft.Divider(height=5, color=ft.Colors.RED_100),
+        #                                     Telemetry(page)
+        #                                 ]
+        #                             )
+        #                         )
+        #                     )
+        #                 ]
+        #             )
+        #         )
+        #     )
             self.main_container.update()
 
         page.on_resized = resize_page
@@ -94,8 +94,8 @@ class Dashboard(ft.Container):
                             ft.IconButton(icon=ft.Icons.HOME,icon_color="white", on_click=home_function),
                             ft.IconButton(icon=ft.Icons.TABLE_VIEW,icon_color="white", on_click=table_function),
                             ft.IconButton(icon=ft.Icons.APP_REGISTRATION,icon_color="white", on_click=register_function),
-                            ft.IconButton(icon=ft.Icons.REPORT,icon_color="white", on_click=invoice_function),
-                            ft.IconButton(icon=ft.Icons.ADDCHART,icon_color="white", on_click=dashboard_function)
+                            ft.IconButton(icon=ft.Icons.REPORT,icon_color="white", on_click=invoice_function)
+                            # ft.IconButton(icon=ft.Icons.ADDCHART,icon_color="white", on_click=dashboard_function)
                             ]
                         )                
                         ]),

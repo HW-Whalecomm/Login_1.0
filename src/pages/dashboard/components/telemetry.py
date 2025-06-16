@@ -1,129 +1,84 @@
 import flet as ft 
+import pages.dashboard.components.utils.data_request as datos
 
 class Telemetry(ft.Container):
-    def __init__(self,page:ft.Page):
+    def __init__(self,page:ft.Page, medidor):
         super().__init__()
 
         self.expand = True
 
-        self.timestamp = ft.Container(
-            expand=True,
-            padding= ft.padding.all(10),
-            content=(
-                ft.Row(
-                    alignment="start",
-                    controls=[
-                        ft.Container(
-                            col = 1,
-                            expand = True,
-                            content = (
-                                ft.Icon(name=ft.Icons.CALENDAR_MONTH_OUTLINED, color="red",size=32)
-                                )
-                        ),
-                        ft.Container(
-                            expand = True,
-                            content = (
-                                ft.Column(
-                                    controls = [
-                                        ft.Text("Hora y fecha de la última lectura recibida", color="black"),
-                                        ft.Text("4 de Abril de 2025 12:35:56", color=ft.Colors.BLACK26)
-                                        ]
-                                    )
-                            )
-                        ),
-                    ]
-                )
-            )
-        )
-
-
-        self.bateria = ft.Container(
-            # height=100,
-            # width=160,
-            expand=True,
-            padding= ft.padding.all(20),
-            content=(
-                ft.Row(
-                    alignment="start",
-                    controls=[
-                        ft.Container(
-                            expand = True,
-                            content=(
-                                ft.Icon(name=ft.Icons.BATTERY_5_BAR, color="green",size=32)
-                            )
-                        ),
-                        ft.Container(
-                            expand = True,
-                            content = (
-                                ft.Column(
-                                    controls = [
-                                        ft.Text("Voltaje en batería:", color="black"),
-                                        ft.Text("3.8", color=ft.Colors.BLACK38)
-                                    ]
-                                )
-                            )
-                        )
-                        
-                    ]
-                )
-            )
-        )
-
-
-        self.lectura = ft.Container(
-            # height=250,
-            # width=190,
-            expand=True,
-            padding= ft.padding.all(20),
-            content=(
-                ft.Row(
-                    alignment="start",
-                    controls=[
-                        ft.Container(
-                            expand=True,
-                            content=(
-                                ft.Icon(name=ft.Icons.WATER_DROP, color="blue", size=56)
-                            )
-                        ),
-                        ft.Container(
-                            expand = True,
-                            content = (
-                                ft.Column(
-                                    controls=[
-                                        ft.Text("Número de cuenta: 23017"),
-                                        ft.Text("Titular: Fulanito Goméz"),
-                                        ft.Text("Domicilio: P. Noria 1234"),
-                                        ft.Text("Medidor: 230671816"),
-                                        ft.Text("Lectura del medidor"),
-                                        ft.Text("86.4637 m³")
-                                    ]
-                                )
-                            )
-                        )
-                        
-                    ]
-                )
-            )
-        )
+        medidor = medidor
+        cuenta = datos.medidores_data[medidor]["cuenta"]
+        titular = datos.medidores_data[medidor]["titular"]
+        direccion = datos.medidores_data[medidor]["direccion"]
+        lectura = datos.medidores_data[medidor]["lectura"]
+        fecha = datos.medidores_data[medidor]["fecha"]
+        bateria = datos.medidores_data[medidor]["batería"]
         
+        self.data_meter = ft.Container(
+            expand = True,
+            padding = ft.padding.all(15),
+            content=(
+                ft.Column(controls=[
+                            ft.Row(controls=[ft.Text("Medidor ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK ),ft.Text(medidor,size=14 ,color=ft.Colors.BLACK)]),
+                            ft.Row(controls=[ft.Text("Cuenta ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(cuenta,size=14 ,color=ft.Colors.BLACK)]),
+                            ft.Row(controls=[ft.Text("Titular ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(titular,size=14 ,color=ft.Colors.BLACK)]),
+                            ft.Row(controls=[ft.Text("Dirección ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(direccion,size=14 ,color=ft.Colors.BLACK)]),
+                            ft.Row(controls=[ft.Text("Lectura ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(lectura,size=14 ,color=ft.Colors.BLACK),ft.Text(" m³",size=14 ,color=ft.Colors.BLACK)]),
+                            ft.Row(controls=[ft.Text("Fecha ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(fecha,size=14 ,color=ft.Colors.BLACK)]),
+                            ft.Row(controls=[ft.Text("Batería ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(bateria,size=14 ,color=ft.Colors.BLACK),ft.Text(" V",size=14 ,color=ft.Colors.BLACK)])
+                ],
+                alignment=ft.MainAxisAlignment.CENTER,
+                )
+            )
+        )
+
+        self.historicos = ft.DataTable(
+                    horizontal_lines=ft.border.BorderSide(1, ft.Colors.RED_200),
+                    columns=[
+                        ft.DataColumn(ft.Text("Período",size=14 ,color=ft.Colors.BLACK)),
+                        ft.DataColumn(ft.Text("Consumo m³",size=14 ,color=ft.Colors.BLACK))
+                    ],
+                    rows=[
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("Agosto 2024",size=12 ,color=ft.Colors.BLACK)),
+                                ft.DataCell(ft.Text("12.7654",size=12 ,color=ft.Colors.BLACK))
+                            ]
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("Septiembre 2024",size=12 ,color=ft.Colors.BLACK)),
+                                ft.DataCell(ft.Text("5.7564",size=12 ,color=ft.Colors.BLACK))
+                            ]
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("Octubre 2024",size=12 ,color=ft.Colors.BLACK)),
+                                ft.DataCell(ft.Text("3.9837",size=12 ,color=ft.Colors.BLACK))
+                            ]
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("Noviembre 2024",size=12 ,color=ft.Colors.BLACK)),
+                                ft.DataCell(ft.Text("0.6754",size=12 ,color=ft.Colors.BLACK))
+                            ]
+                        ),
+                        ft.DataRow(
+                            cells=[
+                                ft.DataCell(ft.Text("Diciembre 2024",size=12 ,color=ft.Colors.BLACK)),
+                                ft.DataCell(ft.Text("19.0763",size=12 ,color=ft.Colors.BLACK))
+                            ]
+                        )
+                    ]
+                )
+       
 
         self.content = ft.Row(
             alignment="start",
             controls=[
-                ft.Container(
-                    expand = True,
-                    content=(
-                        ft.Column(
-                        alignment="start",
-                        controls=[
-                            self.timestamp,
-                            ft.Divider(height=5, color=ft.Colors.RED_100),
-                            self.bateria
-                            ]
-                        )
-                    )
-                ),
+                self.data_meter,
                 ft.VerticalDivider(width=1, color=ft.Colors.RED_100),
-                self.lectura
+                self.historicos
             ]
         )

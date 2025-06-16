@@ -28,6 +28,7 @@ def main(page:ft.Page):
             page.add(Mapa(page))
         if page.route == "/":
              page.add(Login(page))
+             
 
     page.on_route_change = route_change
   
