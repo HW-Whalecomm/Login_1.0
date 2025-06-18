@@ -4,6 +4,30 @@ import datetime
 
 medidores_data={}
 medidores_corte={}
+medidores_historico={}
+medidores_consumos = {}
+
+def historicos():
+   global medidores_historico
+   global medidores_consumos
+   aux_register = 0
+   medidores = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/historicos")
+   medidores = json.loads(medidores.text)
+   medidores_consumos = medidores
+   ids = list(medidores.keys())
+   for encoder in ids:
+    for periodo in medidores[encoder]:
+        medidores_historico[aux_register]={
+            "medidor":encoder,
+            "cuenta": medidores_data[encoder]['cuenta'],
+            "periodo":periodo,
+            "fecha":medidores[encoder][periodo]["fecha"],
+            "consumo":medidores[encoder][periodo]["consumo"],
+            "inicio":medidores[encoder][periodo]["lec_inicio"],
+            "corte":medidores[encoder][periodo]["lec_corte"]
+                }
+        aux_register = aux_register + 1 
+
 
 
 def corte_periodo():
@@ -29,9 +53,6 @@ def corte_periodo():
 
 def request_data():
    global medidores_data
-
-
-
    medidores = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/consulta")
    lectura = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/lectura")
    status = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/status")

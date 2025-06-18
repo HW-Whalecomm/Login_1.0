@@ -101,14 +101,16 @@ class Header(ft.Container):
             data_col6 = data_rows.cells[5]
             data_col7 = data_rows.cells[6]
             data_col8 = data_rows.cells[7]
-            data_rows.visible=(True if (e.control.value.lower() in data_col1.content.value.lower()) or
-                                 (e.control.value.lower() in data_col2.content.value.lower()) or 
+            data_col9 = data_rows.cells[8]
+            data_rows.visible=(True if (e.control.value.lower() in str(data_col1.content.value).lower()) or
+                                 (e.control.value.lower() in str(data_col2.content.value).lower()) or 
                                  (e.control.value.lower() in str(data_col3.content.value).lower()) or 
-                                 (e.control.value.lower() in data_col4.content.value.lower()) or
-                                 (e.control.value.lower() in data_col5.content.value.lower()) or 
+                                 (e.control.value.lower() in str(data_col4.content.value).lower()) or
+                                 (e.control.value.lower() in str(data_col5.content.value).lower()) or 
                                  (e.control.value.lower() in str(data_col6.content.value).lower()) or 
-                                 (e.control.value.lower() in data_col7.content.value.lower()) or 
-                                 (e.control.value.lower() in str(data_col8.content.value).lower()) 
+                                 (e.control.value.lower() in str(data_col7.content.value).lower()) or
+                                 (e.control.value.lower() in str(data_col8.content.value).lower()) or
+                                 (e.control.value.lower() in str(data_col9.content.value).lower()) 
                                  else False)
             
             data_rows.update()

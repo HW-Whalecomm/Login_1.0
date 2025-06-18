@@ -13,6 +13,7 @@ from pages.authentication.utils.colors import customBgColor,customBorderColor,cu
 
 def main(page:ft.Page):
     datos.request_data()
+    datos.historicos()
     def route_change(route):
         # page.views.clear()
         # page.views.append(views_handler(page)[page.route])
