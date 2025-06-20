@@ -1,6 +1,7 @@
 import flet as ft
 import pages.dashboard.components.utils.data_request as datos
-#from pages.dashboard.components.utils.mqtt_data import * 
+from pages.dashboard.components.register import Register
+
 
 class Controller:
     items: dict = datos.medidores_data
@@ -79,11 +80,23 @@ class Header(ft.Container):
         #define other class atributes
         self.avatar = ft.IconButton(icon=ft.Icons.SEARCH,icon_color="#cb2b2b")
 
+        
+
+        # self.registrar = ft.ElevatedButton("Registro Nuevo",
+        #                                      style=ft.ButtonStyle(
+        #                                          color=ft.Colors.WHITE,
+        #                                          bgcolor="#cb2b2b",
+        #                                      ),
+        #                                      on_click= Tabla.registro,
+        #                                      width=120,
+        #                                      )
+
         #compile the attributyes inside the header container
         self.content = ft.Row(
             alignment="end",
             controls=[self.search,self.avatar]
         )
+    
 
     #define method that toggles search box visibility
     def toogle_search(self, e: ft.HoverEvent):
@@ -306,6 +319,7 @@ class Tabla(ft.Container):
                 )
             )
         )
+
         
         
         # self.update()

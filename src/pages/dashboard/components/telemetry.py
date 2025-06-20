@@ -14,6 +14,15 @@ class Telemetry(ft.Container):
         lectura = datos.medidores_data[medidor]["lectura"]
         fecha = datos.medidores_data[medidor]["fecha"]
         bateria = datos.medidores_data[medidor]["batería"]
+        status = datos.medidores_data[medidor]["status"]
+        historico = datos.medidor_historico[medidor]
+
+        if status == "disconnected":
+            fondo=ft.Colors.RED_300
+        elif status == "telemetry":
+            fondo=ft.Colors.AMBER_300
+        else:
+            fondo=ft.Colors.WHITE
         
         self.data_meter = ft.Container(
             expand = True,
@@ -26,51 +35,35 @@ class Telemetry(ft.Container):
                             ft.Row(controls=[ft.Text("Dirección ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(direccion,size=14 ,color=ft.Colors.BLACK)]),
                             ft.Row(controls=[ft.Text("Lectura ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(lectura,size=14 ,color=ft.Colors.BLACK),ft.Text(" m³",size=14 ,color=ft.Colors.BLACK)]),
                             ft.Row(controls=[ft.Text("Fecha ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(fecha,size=14 ,color=ft.Colors.BLACK)]),
-                            ft.Row(controls=[ft.Text("Batería ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(bateria,size=14 ,color=ft.Colors.BLACK),ft.Text(" V",size=14 ,color=ft.Colors.BLACK)])
+                            ft.Row(controls=[ft.Text("Batería ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK),ft.Text(bateria,size=14 ,color=ft.Colors.BLACK),ft.Text(" V",size=14 ,color=ft.Colors.BLACK)]),                           
+                            ft.Row(controls=[ft.Text("Status ",size=18, weight=ft.FontWeight.BOLD ,color=ft.Colors.BLACK,bgcolor=fondo),ft.Text(status,size=14 ,color=ft.Colors.BLACK,bgcolor=fondo)])
                 ],
                 alignment=ft.MainAxisAlignment.CENTER,
                 )
             )
         )
 
+        llave = list(historico.keys())
+        filas=[]
+        for registro in llave:
+            print(registro)
+            per_con = ft.DataRow(cells=[
+                ft.DataCell(ft.Text(str(historico[registro]["periodo"]),size=12 ,color=ft.Colors.BLACK)),
+                ft.DataCell(ft.Text(str(historico[registro]["consumo"]),size=12 ,color=ft.Colors.BLACK)),
+                ft.DataCell(ft.Text(str(historico[registro]["inicio"]),size=12 ,color=ft.Colors.BLACK)),
+                ft.DataCell(ft.Text(str(historico[registro]["corte"]),size=12 ,color=ft.Colors.BLACK))
+            ])
+            filas.append(per_con)
+
         self.historicos = ft.DataTable(
                     horizontal_lines=ft.border.BorderSide(1, ft.Colors.RED_200),
                     columns=[
                         ft.DataColumn(ft.Text("Período",size=14 ,color=ft.Colors.BLACK)),
-                        ft.DataColumn(ft.Text("Consumo m³",size=14 ,color=ft.Colors.BLACK))
+                        ft.DataColumn(ft.Text("Consumo m³",size=14 ,color=ft.Colors.BLACK)),
+                        ft.DataColumn(ft.Text("L. Inicial m³",size=14 ,color=ft.Colors.BLACK)),
+                        ft.DataColumn(ft.Text("L. Final m³",size=14 ,color=ft.Colors.BLACK)),
                     ],
-                    rows=[
-                        ft.DataRow(
-                            cells=[
-                                ft.DataCell(ft.Text("Agosto 2024",size=12 ,color=ft.Colors.BLACK)),
-                                ft.DataCell(ft.Text("12.7654",size=12 ,color=ft.Colors.BLACK))
-                            ]
-                        ),
-                        ft.DataRow(
-                            cells=[
-                                ft.DataCell(ft.Text("Septiembre 2024",size=12 ,color=ft.Colors.BLACK)),
-                                ft.DataCell(ft.Text("5.7564",size=12 ,color=ft.Colors.BLACK))
-                            ]
-                        ),
-                        ft.DataRow(
-                            cells=[
-                                ft.DataCell(ft.Text("Octubre 2024",size=12 ,color=ft.Colors.BLACK)),
-                                ft.DataCell(ft.Text("3.9837",size=12 ,color=ft.Colors.BLACK))
-                            ]
-                        ),
-                        ft.DataRow(
-                            cells=[
-                                ft.DataCell(ft.Text("Noviembre 2024",size=12 ,color=ft.Colors.BLACK)),
-                                ft.DataCell(ft.Text("0.6754",size=12 ,color=ft.Colors.BLACK))
-                            ]
-                        ),
-                        ft.DataRow(
-                            cells=[
-                                ft.DataCell(ft.Text("Diciembre 2024",size=12 ,color=ft.Colors.BLACK)),
-                                ft.DataCell(ft.Text("19.0763",size=12 ,color=ft.Colors.BLACK))
-                            ]
-                        )
-                    ]
+                    rows=filas
                 )
        
 

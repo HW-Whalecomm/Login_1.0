@@ -62,6 +62,8 @@ class Register(ft.Container):
         self.rowencoder_value = text_field()
         self.rowoffset_value = text_field()
         self.rowoffset_value.value = "0.0"
+        self.rowcons_max_value = text_field()
+        self.rowcons_max_value.value = "0.0"
 
         #define and wrap each inside container
         self.rowtitular = text_field_container(True, "Titular", self.rowtitular_value)
@@ -69,12 +71,13 @@ class Register(ft.Container):
         self.rowlatitud = text_field_container(1, "Latitud", self.rowlatitud_value)
         self.rowlongitud = text_field_container(1, "Longitud", self.rowlongitud_value)
         self.rowcuenta = text_field_container(2, "Cuenta", self.rowcuenta_value)
-        self.rowencoder = text_field_container(2, "ID medidor", self.rowencoder_value)
+        self.rowencoder = text_field_container(1, "ID medidor", self.rowencoder_value)
         self.rowoffset = text_field_container(1, "Consumo pendiente m³", self.rowoffset_value)
+        self.rowcons_max = text_field_container(1, "Consumo máximo m³", self.rowcons_max_value)
 
         #define a button to submit the data
         self.submit = ft.ElevatedButton(
-            text="Submit",
+            text="Registrar",
             style=ft.ButtonStyle(bgcolor="red",color = "white",shape={"":ft.RoundedRectangleBorder(radius=8)}),
             on_click=self.submit_data,
         )
@@ -85,7 +88,7 @@ class Register(ft.Container):
             controls=[
                 ft.Row(controls=[self.rowtitular]),
                 ft.Row(controls=[self.rowdireccion,self.rowlatitud,self.rowlongitud]),
-                ft.Row(controls=[self.rowcuenta,self.rowencoder,self.rowoffset]),
+                ft.Row(controls=[self.rowcuenta,self.rowencoder,self.rowcons_max,self.rowoffset]),
                 ft.Row(None),
                 ft.Row(None),
                 ft.Row(None),
@@ -174,3 +177,5 @@ class Register(ft.Container):
         self.rowoffset_value.value = ""
 
         self.content.update()
+    
+    

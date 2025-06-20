@@ -6,6 +6,38 @@ medidores_data={}
 medidores_corte={}
 medidores_historico={}
 medidores_consumos = {}
+medidor_historico = {}
+medidor_historico_desor={}
+
+mes ={
+      "Ene":'01',
+      "Feb":'02',
+      "Mar":'03',
+      "Abr":'04',
+      "May":'05',
+      "Jun":'06',
+      "Jul":'07',
+      "Ago":'08',
+      "Sep":'09',
+      "Oct":'10',
+      "Nov":'11',
+      "Dic":'12'
+      }
+
+mes_num ={
+      "01":"Ene",
+      "02":"Feb",
+      "03":"Mar",
+      "04":"Abr",
+      "05":"May",
+      "06":"Jun",
+      "07":"Jul",
+      "08":"Ago",
+      "09":"Sep",
+      "10":"Oct",
+      "11":"Nov",
+      "12":"Dic"
+      }
 
 def historicos():
    global medidores_historico
@@ -16,8 +48,9 @@ def historicos():
    medidores_consumos = medidores
    ids = list(medidores.keys())
    for encoder in ids:
-    for periodo in medidores[encoder]:
-        medidores_historico[aux_register]={
+      medidor_historico_desor[encoder]={}
+      for periodo in medidores[encoder]:
+         medidores_historico[aux_register]={
             "medidor":encoder,
             "cuenta": medidores_data[encoder]['cuenta'],
             "periodo":periodo,
@@ -25,10 +58,40 @@ def historicos():
             "consumo":medidores[encoder][periodo]["consumo"],
             "inicio":medidores[encoder][periodo]["lec_inicio"],
             "corte":medidores[encoder][periodo]["lec_corte"]
-                }
-        aux_register = aux_register + 1 
-
-
+                  }
+         medidor_historico_desor[encoder][aux_register]={
+            "periodo":periodo,
+            "consumo":medidores[encoder][periodo]["consumo"],
+            "inicio":medidores[encoder][periodo]["lec_inicio"],
+            "corte":medidores[encoder][periodo]["lec_corte"]
+         }
+         aux_register = aux_register + 1
+      consumo_meter={}
+      for consumo in medidor_historico_desor[encoder]:
+         datos_fecha = medidor_historico_desor[encoder][consumo]['periodo'].split('-')
+         fecha = mes[datos_fecha[0]]+"/01/"+datos_fecha[1]
+         datetime_object = datetime.datetime.strptime(fecha, '%m/%d/%y')
+         consumo_meter[datetime_object]={
+            "consumo":medidor_historico_desor[encoder][consumo]['consumo'],
+            "inicio":medidor_historico_desor[encoder][consumo]['inicio'],
+            "corte":medidor_historico_desor[encoder][consumo]['corte']
+         }
+      
+      dic_ordenado = dict(sorted(consumo_meter.items()))
+      consumos_ordenados={}
+      aux_consumo=0
+      for fechas in dic_ordenado:
+         fecha_dic=(str(fechas)).split()
+         fecha_dic=fecha_dic[0].split('-')
+         fecha_con=mes_num[fecha_dic[1]]+"-"+fecha_dic[0]
+         consumos_ordenados[aux_consumo]={"periodo":fecha_con,
+                                          "consumo":consumo_meter[fechas]["consumo"],
+                                          "inicio":consumo_meter[fechas]["inicio"],
+                                          "corte":consumo_meter[fechas]["corte"]}
+         aux_consumo=aux_consumo+1
+         #consumos_ordenados[fecha_con]=consumo_meter[fechas]
+      
+      medidor_historico[encoder]=consumos_ordenados
 
 def corte_periodo():
    global medidores_corte
