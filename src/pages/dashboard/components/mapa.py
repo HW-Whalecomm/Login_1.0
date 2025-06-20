@@ -63,7 +63,7 @@ class Mapa(ft.Container):
                                 content=(
                                     ft.Column(
                                         controls=[
-                                            Grafica(page),
+                                            Grafica(page,datos_pin),
                                             ft.Divider(height=5, color=ft.Colors.RED_100),
                                             Telemetry(page,datos_pin)
                                         ]

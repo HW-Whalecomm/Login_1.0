@@ -1,29 +1,45 @@
 import flet as ft
+import pages.dashboard.components.utils.data_request as datos
 
 
 class Grafica(ft.Container):
-    def __init__(self,page:ft.Page):
+    def __init__(self,page:ft.Page,medidor):
         super().__init__()
 
         self.expand = True
+        medidor = medidor
+        historico = datos.medidor_historico[medidor]
 
+        puntos = []
+
+        llaves = list(historico.keys())
+        consumo_fecha = {}
+        for llave in llaves:
+            consumo_fecha[historico[llave]["periodo"]] = historico[llave]["consumo"]
+        fechas=list(consumo_fecha.keys())
+        aux_punto=1
+        for consumo in fechas:
+            punto= ft.LineChartDataPoint(aux_punto,float(consumo_fecha[consumo]))
+            puntos.append(punto)
+            aux_punto=aux_punto+1
 
         self.data_consumption = [
             ft.LineChartData(
-                data_points=[
-                    ft.LineChartDataPoint(1,1),
-                    ft.LineChartDataPoint(2,2.5),
-                    ft.LineChartDataPoint(3,6.8),
-                    ft.LineChartDataPoint(4,3.5),
-                    ft.LineChartDataPoint(5,0.3),
-                    ft.LineChartDataPoint(6,9.4),
-                    ft.LineChartDataPoint(7,11.1),
-                    ft.LineChartDataPoint(8,1.4),
-                    ft.LineChartDataPoint(9,14.8),
-                    ft.LineChartDataPoint(10,3.7),
-                    ft.LineChartDataPoint(11,2.1),
-                    ft.LineChartDataPoint(12,1.2)
-                ],
+                data_points=puntos,
+                # data_points=[
+                #     ft.LineChartDataPoint(1,1),
+                #     ft.LineChartDataPoint(2,2.5),
+                #     ft.LineChartDataPoint(3,6.8),
+                #     ft.LineChartDataPoint(4,3.5),
+                #     ft.LineChartDataPoint(5,0.3),
+                #     ft.LineChartDataPoint(6,9.4),
+                #     ft.LineChartDataPoint(7,11.1),
+                #     ft.LineChartDataPoint(8,1.4),
+                #     ft.LineChartDataPoint(9,14.8),
+                #     ft.LineChartDataPoint(10,3.7),
+                #     ft.LineChartDataPoint(11,2.1),
+                #     ft.LineChartDataPoint(12,1.2)
+                # ],
                 stroke_width = 5,
                 color = "red",
                 below_line_bgcolor = ft.Colors.with_opacity(0.3, ft.Colors.RED_200),
@@ -169,7 +185,7 @@ class Grafica(ft.Container):
             tooltip_bgcolor=ft.Colors.with_opacity(0.7, ft.Colors.WHITE12),
             min_x=0,
             min_y=0,
-            max_x=13,
+            max_x=len(fechas)+1,
             max_y=16,
             expand=True,
             animate=ft.animation.Animation(1000, ft.AnimationCurve.BOUNCE_OUT),

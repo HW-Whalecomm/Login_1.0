@@ -46,7 +46,7 @@ class Telemetry(ft.Container):
         llave = list(historico.keys())
         filas=[]
         for registro in llave:
-            print(registro)
+            #print(registro)
             per_con = ft.DataRow(cells=[
                 ft.DataCell(ft.Text(str(historico[registro]["periodo"]),size=12 ,color=ft.Colors.BLACK)),
                 ft.DataCell(ft.Text(str(historico[registro]["consumo"]),size=12 ,color=ft.Colors.BLACK)),
