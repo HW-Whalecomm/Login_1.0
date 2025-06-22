@@ -27,6 +27,21 @@ class Mapa(ft.Container):
                                                                                                                 ],
                                                                                                              tile_mode=ft.GradientTileMode.MIRROR
                                                                                                             ))
+            color = None
+            if (float(self.pines[datos_pin]["batería"])>3.0 and float(self.pines[datos_pin]["batería"])<3.5):
+                color = ft.Colors.ORANGE
+            elif float(self.pines[datos_pin]["batería"])<3.0:
+                color = ft.Colors.RED
+            else:
+                color = ft.Colors.GREEN
+
+
+            if self.pines[datos_pin]["status"]=="telemetry":
+                color = ft.Colors.ORANGE
+            elif self.pines[datos_pin]["status"]=="disconnected":
+                color = ft.Colors.RED
+            else:
+                pass
             self.content=ft.Container(content=ft.Container(
                 content = (
                     ft.Row(
@@ -49,7 +64,7 @@ class Mapa(ft.Container):
                                                         ref = self.marker_layer_ref,
                                                         markers = [
                                                             map.Marker(
-                                                            content=ft.Icon(ft.Icons.LOCATION_ON, color="#58A0DB",tooltip=leyenda),
+                                                            content=ft.Icon(ft.Icons.LOCATION_ON, color=color,tooltip=leyenda),
                                                             coordinates=map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1])) )
                                                         ]
                                                     )          
@@ -84,14 +99,24 @@ class Mapa(ft.Container):
         for pin in self.pines:
             #linea de cambio
             data_ubicacion=self.pines[pin]["ubicacion"].split(",")
-            if self.pines[pin]["status"]=="telemetry" or (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
+
+
+            if (float(self.pines[pin]["batería"])>3.0 and float(self.pines[pin]["batería"])<3.5):
                 color = ft.Colors.ORANGE
-            elif self.pines[pin]["status"]=="disconnected" or float(self.pines[pin]["batería"])<3.0:
+            elif float(self.pines[pin]["batería"])<3.0:
                 color = ft.Colors.RED
             else:
                 color = ft.Colors.GREEN
+
+
+            if self.pines[pin]["status"]=="telemetry":
+                color = ft.Colors.ORANGE
+            elif self.pines[pin]["status"]=="disconnected":
+                color = ft.Colors.RED
+            else:
+                pass
             
-            texto = "Encoder: {encoder}\nCuenta: {cuenta}\nLectura: {lectura}\nFecha: {fecha}\nBatería: {bat}\nStatus: {status}".format(encoder=pin, cuenta=self.pines[pin]["cuenta"],lectura=self.pines[pin]["lectura"],fecha=self.pines[pin]["fecha"],bat = self.pines[pin]["batería"],status=self.pines[pin]["status"])
+            texto = "Encoder: {encoder}\nCuenta: {cuenta}\nLectura: {lectura} m³\nFecha: {fecha}\nBatería: {bat} V\nStatus: {status}".format(encoder=pin, cuenta=self.pines[pin]["cuenta"],lectura=self.pines[pin]["lectura"],fecha=self.pines[pin]["fecha"],bat = self.pines[pin]["batería"],status=self.pines[pin]["status"])
 
             self.leyenda = ft.Tooltip(message=texto,text_style=ft.TextStyle(size=18, color=ft.Colors.WHITE),gradient=ft.LinearGradient(
                                                                                                                 begin=ft.alignment.top_left,

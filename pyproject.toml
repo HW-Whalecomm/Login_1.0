@@ -44,4 +44,4 @@ package-mode = false
 [tool.poetry.group.dev.dependencies]
 flet = {extras = ["all"], version = "0.27.5"}
 flet-map = {version = "0.1.0"}
-requests = {version = "2.32.3"}
+requests = {version = "2.32.4"}
