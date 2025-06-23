@@ -12,8 +12,8 @@ from pages.authentication.utils.colors import customBgColor,customBorderColor,cu
 
 
 def main(page:ft.Page):
-    datos.request_data()
-    datos.historicos()
+    # datos.request_data()
+    # datos.historicos()
     def route_change(route):
         # page.views.clear()
         # page.views.append(views_handler(page)[page.route])
@@ -25,8 +25,8 @@ def main(page:ft.Page):
             page.add(Login(page))
         if page.route == "/dashboard":
             page.add(Dashboard(page))
-        if page.route == "/mapa":
-            page.add(Mapa(page))
+        # if page.route == "/mapa":
+        #     page.add(Mapa(page))
         if page.route == "/":
              page.add(Login(page))
              
