@@ -69,7 +69,7 @@ class Login(ft.Container):
             acceso = hash_verify(password_ingreso,usuario_ingreso)
             if acceso:
                 print("Bienvenido")
-                self.page.go("/")
+                self.page.go("/dashboard")
             else:
                 print("Usuario o contraseña equivocados")
         else:

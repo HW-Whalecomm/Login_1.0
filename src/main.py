@@ -33,7 +33,7 @@ def main(page:ft.Page):
 
     page.on_route_change = route_change
   
-    page.go("/dashboard")
+    page.go("/")
     
 
 
