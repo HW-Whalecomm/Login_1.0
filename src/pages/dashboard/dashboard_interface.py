@@ -4,6 +4,7 @@ from pages.dashboard.components.tabla_corte import Tabla_corte
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.components.register import Register
 from pages.authentication.access import token
+import pages.dashboard.components.utils.data_request as datos
 from styles.colors import *
 
 
@@ -45,6 +46,21 @@ class Dashboard(ft.Container):
             def invoice_function(e):
                 self.main_container.content=Tabla_corte(page)
                 self.main_container.update()
+
+            def logout(e):
+                global token
+                
+                token=[]
+                datos.medidor_historico={}
+                datos.medidor_historico_desor={}
+                datos.medidores_consumos={}
+                datos.medidores_corte={}
+                datos.medidores_data={}
+                datos.medidores_historico={}
+                datos.mes={}
+                datos.mes_num={}
+
+                self.page.go("/")
 
             # def dashboard_function(e):
             #     self.main_container.content = ft.Container(
@@ -103,7 +119,7 @@ class Dashboard(ft.Container):
                             ft.Row(alignment="end",expand=True,controls=[
                                 ft.Column(alignment="end",expand=True,
                                     controls=[
-                                        ft.IconButton(icon=ft.Icons.EXIT_TO_APP,icon_color="white")
+                                        ft.IconButton(icon=ft.Icons.EXIT_TO_APP,icon_color="white", on_click=logout)
                                     ]
                                 )
                             ])
