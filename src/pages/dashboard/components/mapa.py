@@ -47,9 +47,9 @@ class Mapa(ft.Container):
                     ft.Row(
                         controls = [
                             ft.Container(
-                                expand = True,
+                                expand = 1,
                                 content=(map.Map(
-                                                expand = 1,
+                                                expand = True,
                                                 initial_center = map.MapLatitudeLongitude(float(data_ubicacion[0]), float(data_ubicacion[1])),
                                                 initial_zoom = 18,
                                                 interaction_configuration = map.MapInteractionConfiguration(
@@ -74,7 +74,7 @@ class Mapa(ft.Container):
                             ),
                             ft.VerticalDivider(width=1, color=ft.Colors.RED_100),
                             ft.Container(
-                                expand=3,
+                                expand=2,
                                 content=(
                                     ft.Column(
                                         controls=[
