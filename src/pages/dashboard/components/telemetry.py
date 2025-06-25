@@ -56,22 +56,24 @@ class Telemetry(ft.Container):
             filas.append(per_con)
 
         self.historicos = ft.DataTable(
-                    horizontal_lines=ft.border.BorderSide(1, ft.Colors.RED_200),
-                    columns=[
-                        ft.DataColumn(ft.Text("Período",size=14 ,color=ft.Colors.BLACK)),
-                        ft.DataColumn(ft.Text("Consumo m³",size=14 ,color=ft.Colors.BLACK)),
-                        ft.DataColumn(ft.Text("L. Inicial m³",size=14 ,color=ft.Colors.BLACK)),
-                        ft.DataColumn(ft.Text("L. Final m³",size=14 ,color=ft.Colors.BLACK)),
-                    ],
-                    rows=filas
-                )
-       
+                                        horizontal_lines=ft.border.BorderSide(1, ft.Colors.RED_200),
+                                        columns=[
+                                            ft.DataColumn(ft.Text("Período",size=14 ,color=ft.Colors.BLACK)),
+                                            ft.DataColumn(ft.Text("Consumo m³",size=14 ,color=ft.Colors.BLACK)),
+                                            ft.DataColumn(ft.Text("L. Inicial m³",size=14 ,color=ft.Colors.BLACK)),
+                                            ft.DataColumn(ft.Text("L. Final m³",size=14 ,color=ft.Colors.BLACK)),
+                                        ],
+                                        rows=filas
+                                    )
+
+        
+
 
         self.content = ft.Row(
             alignment="start",
             controls=[
-                self.data_meter,
+                ft.Column(controls=[self.data_meter],scroll="hidden"),
                 ft.VerticalDivider(width=1, color=ft.Colors.RED_100),
-                self.historicos
+                ft.Column(controls=[self.historicos],scroll="hidden")
             ]
         )

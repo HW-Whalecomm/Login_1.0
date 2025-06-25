@@ -1,5 +1,4 @@
 import flet as ft
-
 from pages.authentication.components.fields import CustomTextField
 from pages.authentication.utils.colors import *
 from pages.authentication.utils.validation import Validation

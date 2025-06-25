@@ -26,7 +26,7 @@ class Grafica(ft.Container):
             punto= ft.LineChartDataPoint(aux_punto,volumen)
             etiquetax=ft.ChartAxisLabel(
                         value = aux_punto,
-                        label = ft.Text(consumo, size = 16, weight = ft.FontWeight.BOLD, color = "black")
+                        label = ft.Text(consumo, size = 12, weight = ft.FontWeight.BOLD, color = "black")
                     )         
             puntos.append(punto)
             etiquetas_x.append(etiquetax)
@@ -170,68 +170,6 @@ class Grafica(ft.Container):
             ),
             left_axis = ft.ChartAxis(
                 labels=etiquetas_y,
-                # labels = [
-                #     ft.ChartAxisLabel(
-                #         value = 1,
-                #         label = ft.Text("1m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 2,
-                #         label = ft.Text("2m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 3,
-                #         label = ft.Text("3m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 4,
-                #         label = ft.Text("4m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 5,
-                #         label = ft.Text("5m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 6,
-                #         label = ft.Text("6m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 7,
-                #         label = ft.Text("7m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 8,
-                #         label = ft.Text("8m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 9,
-                #         label = ft.Text("9m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 10,
-                #         label = ft.Text("10m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 11,
-                #         label = ft.Text("11m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 12,
-                #         label = ft.Text("12m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 13,
-                #         label = ft.Text("13m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 14,
-                #         label = ft.Text("14m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                #     ft.ChartAxisLabel(
-                #         value = 15,
-                #         label = ft.Text("15m³", size = 14, weight = ft.FontWeight.BOLD, color="black"),
-                #     ),
-                # ],
                 labels_size=45,
                 
             ),
