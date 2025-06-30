@@ -168,7 +168,7 @@ class Dashboard(ft.Container):
                 t0 = int(t0.timestamp())
                 t_now = t0
                 while(1):
-                    if t_now-t0 > 3600:
+                    if t_now-t0 > 36:
                         datos.request_data()
                         datos.historicos()
                         datos.historicos()
@@ -178,8 +178,8 @@ class Dashboard(ft.Container):
                     t_now = datetime.datetime.now()
                     t_now = int(t_now.timestamp())
                 
-            # t_update = threading.Thread(target=actualizar_data)
-            # t_update.start()
+            t_update = threading.Thread(target=actualizar_data)
+            t_update.start()
         
         else:
             self.main_container=ft.Container(
