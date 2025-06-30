@@ -36,7 +36,7 @@ dev-dependencies = [
     "flet[all]==0.27.5",
     "flet-map==0.1.0",
     "requests==2.32.3",
-    "threading==3.8"
+    "thread==2.0.5"
 ]
 
 [tool.poetry]
@@ -46,4 +46,4 @@ package-mode = false
 flet = {extras = ["all"], version = "0.27.5"}
 flet-map = {version = "0.1.0"}
 requests = {version = "2.32.4"}
-threading = {version = "3.8"}
+thread = {version = "2.0.5"}

@@ -1,6 +1,6 @@
 import flet as ft
 import time
-import threading
+import thread
 import datetime
 from pages.dashboard.components.tabla import Tabla
 from pages.dashboard.components.tabla_corte import Tabla_corte
@@ -178,8 +178,8 @@ class Dashboard(ft.Container):
                     t_now = datetime.datetime.now()
                     t_now = int(t_now.timestamp())
                 
-            # t_update = threading.Thread(target=actualizar_data)
-            # t_update.start()
+            t_update = thread.Thread(target=actualizar_data)
+            t_update.start()
         
         else:
             self.main_container=ft.Container(
