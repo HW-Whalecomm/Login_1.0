@@ -1,4 +1,7 @@
 import flet as ft
+import time
+import threading
+import datetime
 from pages.dashboard.components.tabla import Tabla
 from pages.dashboard.components.tabla_corte import Tabla_corte
 from pages.dashboard.components.mapa import Mapa
@@ -28,6 +31,10 @@ class Dashboard(ft.Container):
                 page.update()
             
             def home_function(e):
+                self.main_container.content=Mapa(page)
+                self.main_container.update()
+            
+            def home_func():
                 self.main_container.content=Mapa(page)
                 self.main_container.update()
             
@@ -61,6 +68,8 @@ class Dashboard(ft.Container):
                 datos.mes_num={}
 
                 self.page.go("/")
+            
+            
 
             # def dashboard_function(e):
             #     self.main_container.content = ft.Container(
@@ -153,6 +162,24 @@ class Dashboard(ft.Container):
                     ]
                 )
             )
+        
+            def actualizar_data():
+                t0 = datetime.datetime.now()
+                t0 = int(t0.timestamp())
+                t_now = t0
+                while(1):
+                    if t_now-t0 > 3600:
+                        datos.request_data()
+                        datos.historicos()
+                        datos.historicos()
+                        t0 = t_now
+                        home_func()
+                    time.sleep(1)
+                    t_now = datetime.datetime.now()
+                    t_now = int(t_now.timestamp())
+                
+            t_update = threading.Thread(target=actualizar_data)
+            t_update.start()
         
         else:
             self.main_container=ft.Container(
