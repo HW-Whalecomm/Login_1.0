@@ -1,7 +1,4 @@
 import flet as ft
-import threading
-import datetime
-import time
 from pages.authentication.login import Login
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.dashboard_interface import Dashboard
@@ -32,24 +29,6 @@ def main(page:ft.Page):
             page.add(Mapa(page))
         if page.route == "/":
              page.add(Login(page))
-    
-    # def actualizar_data():
-    #     t0 = datetime.datetime.now()
-    #     t0 = int(t0.timestamp())
-    #     t_now = t0
-    #     while(1):
-    #         if t_now-t0 > 3600:
-    #             datos.request_data()
-    #             datos.historicos()
-    #             datos.historicos()
-    #             t0 = t_now
-    #             page.go("/dashboard")
-    #         time.sleep(1)
-    #         t_now = datetime.datetime.now()
-    #         t_now = int(t_now.timestamp())
-
-
-             
 
     page.on_route_change = route_change
   

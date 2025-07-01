@@ -1,7 +1,7 @@
 import flet as ft
 import time
-import thread
 import datetime
+import asyncio
 from pages.dashboard.components.tabla import Tabla
 from pages.dashboard.components.tabla_corte import Tabla_corte
 from pages.dashboard.components.mapa import Mapa
@@ -16,7 +16,7 @@ class Dashboard(ft.Container):
     def __init__(self, page:ft.Page):
         super().__init__()
         
-        
+        # self.page.run_thread(self.actualizar_data)
         self.padding_ok = 10
         self.update_height= page.height - (2*self.padding_ok)
 
@@ -163,23 +163,24 @@ class Dashboard(ft.Container):
                 )
             )
         
-            def actualizar_data():
-                t0 = datetime.datetime.now()
-                t0 = int(t0.timestamp())
-                t_now = t0
-                while(1):
-                    if t_now-t0 > 36:
-                        datos.request_data()
-                        datos.historicos()
-                        datos.historicos()
-                        t0 = t_now
-                        home_func()
-                    time.sleep(1)
-                    t_now = datetime.datetime.now()
-                    t_now = int(t_now.timestamp())
+            # async def actualizar_data():
+            #     t0 = datetime.datetime.now()
+            #     t0 = int(t0.timestamp())
+            #     t_now = t0
+            #     while(1):
+            #         if t_now-t0 > 36:
+            #             datos.request_data()
+            #             datos.historicos()
+            #             datos.historicos()
+            #             t0 = t_now
+            #             home_func()
+            #         time.sleep(1)
+            #         t_now = datetime.datetime.now()
+            #         t_now = int(t_now.timestamp())
                 
-            t_update = thread.Thread(target=actualizar_data)
-            t_update.start()
+            # t_update = mp.Process(target=actualizar_data)
+            # t_update.start()
+            
         
         else:
             self.main_container=ft.Container(
@@ -205,3 +206,23 @@ class Dashboard(ft.Container):
                     ]
                 )
             )
+        
+    async def actualizar_data():
+        t0 = datetime.datetime.now()
+        t0 = int(t0.timestamp())
+        t_now = t0
+        i=1
+        j=0
+        while i > j:
+            if t_now-t0 > 36:
+                datos.request_data()
+                datos.historicos()
+                datos.historicos()
+                t0 = t_now
+                #page.go("/dashboard")
+                print("Se actualizo")
+                i=1
+                j=0
+            await asyncio.sleep(1)
+            t_now = datetime.datetime.now()
+            t_now = int(t_now.timestamp()) 
