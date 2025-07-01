@@ -31,14 +31,22 @@ class Dashboard(ft.Container):
                 page.update()
             
             def home_function(e):
+                t1 = datetime.datetime.now()
+                t1 = int(t1.timestamp())
+                if(t1 - datos.t0 >3600):
+                    datos.request_data()
+                    datos.historicos()
+                    datos.historicos()
                 self.main_container.content=Mapa(page)
                 self.main_container.update()
-            
-            def home_func():
-                self.main_container.content=Mapa(page)
-                self.main_container.update()
-            
+                        
             def table_function(e):
+                t1 = datetime.datetime.now()
+                t1 = int(t1.timestamp())
+                if(t1 - datos.t0 >3600):
+                    datos.request_data()
+                    datos.historicos()
+                    datos.historicos()
                 self.main_container.content=Tabla(page)
                 self.main_container.update()
 
@@ -47,10 +55,22 @@ class Dashboard(ft.Container):
             #     self.main_container.update()
 
             def register_function(e):
+                t1 = datetime.datetime.now()
+                t1 = int(t1.timestamp())
+                if(t1 - datos.t0 >3600):
+                    datos.request_data()
+                    datos.historicos()
+                    datos.historicos()
                 self.main_container.content=Register(page)
                 self.main_container.update()
 
             def invoice_function(e):
+                t1 = datetime.datetime.now()
+                t1 = int(t1.timestamp())
+                if(t1 - datos.t0 >3600):
+                    datos.request_data()
+                    datos.historicos()
+                    datos.historicos()
                 self.main_container.content=Tabla_corte(page)
                 self.main_container.update()
 
@@ -207,22 +227,3 @@ class Dashboard(ft.Container):
                 )
             )
         
-    async def actualizar_data():
-        t0 = datetime.datetime.now()
-        t0 = int(t0.timestamp())
-        t_now = t0
-        i=1
-        j=0
-        while i > j:
-            if t_now-t0 > 36:
-                datos.request_data()
-                datos.historicos()
-                datos.historicos()
-                t0 = t_now
-                #page.go("/dashboard")
-                print("Se actualizo")
-                i=1
-                j=0
-            await asyncio.sleep(1)
-            t_now = datetime.datetime.now()
-            t_now = int(t_now.timestamp()) 

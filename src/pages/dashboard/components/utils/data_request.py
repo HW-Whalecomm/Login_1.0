@@ -8,6 +8,7 @@ medidores_historico={}
 medidores_consumos = {}
 medidor_historico = {}
 medidor_historico_desor={}
+t0 = 0
 
 mes ={
       "Ene":'01',
@@ -116,6 +117,11 @@ def corte_periodo():
 
 def request_data():
    global medidores_data
+   global t0
+
+   t0 = datetime.datetime.now()
+   t0 = int(t0.timestamp())
+
    medidores = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/consulta")
    lectura = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/lectura")
    status = requests.get("https://nkldhxv7pi.execute-api.us-east-1.amazonaws.com/status")
