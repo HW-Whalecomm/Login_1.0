@@ -31,9 +31,9 @@ class Dashboard(ft.Container):
                 page.update()
             
             def home_function(e):
-                dt_object = datetime.datetime.fromtimestamp(datos.t0)
+                dt_object = datetime.datetime.fromtimestamp(datos.t0 +3600)
                 hora = dt_object.strftime("%H:%M:%S")
-                hora_actualizacion = "Se actualizan los datos a las "+hora
+                hora_actualizacion = "Próxima actualización a las "+hora
                 t1 = datetime.datetime.now()
                 t1 = int(t1.timestamp())
                 if(t1 - datos.t0 >3600):

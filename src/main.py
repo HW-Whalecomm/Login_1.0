@@ -24,9 +24,9 @@ def main(page:ft.Page):
             page.add(Login(page))
         if page.route == "/dashboard":
             page.add(Dashboard(page))
-            dt_object = datetime.datetime.fromtimestamp(datos.t0)
+            dt_object = datetime.datetime.fromtimestamp(datos.t0 + 3600)
             hora = dt_object.strftime("%H:%M:%S")
-            hora_actualizacion = "Se actualizan los datos a las "+hora
+            hora_actualizacion = "Próxima actualización a las "+hora
             page.open(ft.SnackBar(ft.Text(hora_actualizacion,color="white"),bgcolor="#cb2b2b"))
         if page.route == "/mapa":
             page.add(Mapa(page))
