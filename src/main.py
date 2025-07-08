@@ -3,8 +3,7 @@ from pages.authentication.login import Login
 from pages.dashboard.components.mapa import Mapa
 from pages.dashboard.dashboard_interface import Dashboard
 import pages.dashboard.components.utils.data_request as datos
-# from pages.dashboard.monitor import Tabla
-# from pages.mapa import Mapa
+import datetime
 from router import views_handler
 from pages.authentication.utils.colors import customBgColor,customBorderColor,customDashboardBG,customPrimaryColor,customSideBarIconColor,customTextColor,customtextHeaderColor
 
@@ -25,6 +24,10 @@ def main(page:ft.Page):
             page.add(Login(page))
         if page.route == "/dashboard":
             page.add(Dashboard(page))
+            dt_object = datetime.datetime.fromtimestamp(datos.t0)
+            hora = dt_object.strftime("%H:%M:%S")
+            hora_actualizacion = "Se actualizan los datos a las "+hora
+            page.open(ft.SnackBar(ft.Text(hora_actualizacion,color="white"),bgcolor="#cb2b2b"))
         if page.route == "/mapa":
             page.add(Mapa(page))
         if page.route == "/":
