@@ -158,5 +158,6 @@ class Mapa(ft.Container):
                 )          
             ],
         )
-
+        
         self.content = self.mapa
+        

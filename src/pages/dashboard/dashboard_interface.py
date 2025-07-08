@@ -31,6 +31,9 @@ class Dashboard(ft.Container):
                 page.update()
             
             def home_function(e):
+                dt_object = datetime.datetime.fromtimestamp(datos.t0)
+                hora = dt_object.strftime("%H:%M:%S")
+                hora_actualizacion = "Se actualizan los datos a las "+hora
                 t1 = datetime.datetime.now()
                 t1 = int(t1.timestamp())
                 if(t1 - datos.t0 >3600):
@@ -39,6 +42,7 @@ class Dashboard(ft.Container):
                     datos.historicos()
                 self.main_container.content=Mapa(page)
                 self.main_container.update()
+                page.open(ft.SnackBar(ft.Text(hora_actualizacion,color="white"),bgcolor="#cb2b2b"))
                         
             def table_function(e):
                 t1 = datetime.datetime.now()
